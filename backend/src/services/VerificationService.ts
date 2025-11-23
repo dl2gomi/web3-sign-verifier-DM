@@ -23,10 +23,10 @@ export interface VerificationResponse {
  * @param signature - The signature to verify
  * @returns Verification result with signer address
  */
-async function verifySignature(
+function verifySignature(
   message: string,
   signature: string,
-): Promise<VerificationResponse> {
+): VerificationResponse {
   try {
     // Recover the signer's address from the signature
     const signerAddress = ethers.verifyMessage(message, signature);
@@ -40,8 +40,11 @@ async function verifySignature(
       signer: signerAddress,
       originalMessage: message,
     };
-  } catch (error) {
-    logger.err('Signature verification failed:', error);
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error
+      ? error.message
+      : String(error);
+    logger.err(`Signature verification failed: ${errorMessage}`);
 
     // If verification fails, return invalid result
     return {
