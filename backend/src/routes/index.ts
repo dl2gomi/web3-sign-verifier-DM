@@ -1,7 +1,7 @@
-import { Router } from "express";
+import { Router } from 'express';
 
-import Paths from "@/common/constants/Paths";
-import VerificationRoutes from "./VerificationRoutes";
+import Paths from '@/common/constants/Paths';
+import VerificationRoutes from './VerificationRoutes';
 
 /******************************************************************************
                                 Setup
@@ -15,10 +15,7 @@ const apiRouter = Router();
 const verificationRouter = Router();
 
 // Verify signature
-verificationRouter.post(
-  Paths.Verification.VerifySignature,
-  VerificationRoutes.verifySignature
-);
+verificationRouter.post(Paths.Verification.VerifySignature, VerificationRoutes.verifySignature);
 
 // Add VerificationRouter
 apiRouter.use(Paths.Verification.Base, verificationRouter);

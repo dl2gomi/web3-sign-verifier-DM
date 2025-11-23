@@ -1,17 +1,16 @@
-import morgan from "morgan";
-import path from "path";
-import helmet from "helmet";
-import cors from "cors";
-import express, { Request, Response, NextFunction } from "express";
-import logger from "jet-logger";
+import morgan from 'morgan';
+import helmet from 'helmet';
+import cors from 'cors';
+import express, { Request, Response, NextFunction } from 'express';
+import logger from 'jet-logger';
 
-import BaseRouter from "@/routes";
+import BaseRouter from '@/routes';
 
-import Paths from "@/common/constants/Paths";
-import ENV from "@/common/constants/ENV";
-import HttpStatusCodes from "@/common/constants/HttpStatusCodes";
-import { RouteError } from "@/common/util/route-errors";
-import { NodeEnvs } from "@/common/constants";
+import Paths from '@/common/constants/Paths';
+import ENV from '@/common/constants/ENV';
+import HttpStatusCodes from '@/common/constants/HttpStatusCodes';
+import { RouteError } from '@/common/util/route-errors';
+import { NodeEnvs } from '@/common/constants';
 
 /******************************************************************************
                                 Setup
@@ -24,9 +23,9 @@ const app = express();
 // CORS - Allow frontend to communicate with backend
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: 'http://localhost:5173',
     credentials: true,
-  })
+  }),
 );
 
 // Basic middleware
@@ -35,7 +34,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Show routes called in console during development
 if (ENV.NodeEnv === NodeEnvs.Dev) {
-  app.use(morgan("dev"));
+  app.use(morgan('dev'));
 }
 
 // Security
@@ -63,18 +62,18 @@ app.use((err: Error, _: Request, res: Response, next: NextFunction) => {
 });
 
 // Health check endpoint
-app.get("/", (_: Request, res: Response) => {
+app.get('/', (_: Request, res: Response) => {
   return res.json({
-    status: "ok",
-    message: "Web3 Signature Verifier API",
-    version: "1.0.0",
+    status: 'ok',
+    message: 'Web3 Signature Verifier API',
+    version: '1.0.0',
   });
 });
 
 // API health check
-app.get("/health", (_: Request, res: Response) => {
+app.get('/health', (_: Request, res: Response) => {
   return res.json({
-    status: "healthy",
+    status: 'healthy',
     timestamp: new Date().toISOString(),
   });
 });

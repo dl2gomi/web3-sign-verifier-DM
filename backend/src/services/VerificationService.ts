@@ -23,17 +23,12 @@ export interface VerificationResponse {
  * @param signature - The signature to verify
  * @returns Verification result with signer address
  */
-function verifySignature(
-  message: string,
-  signature: string,
-): VerificationResponse {
+function verifySignature(message: string, signature: string): VerificationResponse {
   try {
     // Recover the signer's address from the signature
     const signerAddress = ethers.verifyMessage(message, signature);
 
-    logger.info(
-      `Signature verified successfully. Signer: ${signerAddress}`,
-    );
+    logger.info(`Signature verified successfully. Signer: ${signerAddress}`);
 
     return {
       isValid: true,
@@ -41,9 +36,7 @@ function verifySignature(
       originalMessage: message,
     };
   } catch (error: unknown) {
-    const errorMessage = error instanceof Error
-      ? error.message
-      : String(error);
+    const errorMessage = error instanceof Error ? error.message : String(error);
     logger.err(`Signature verification failed: ${errorMessage}`);
 
     // If verification fails, return invalid result
@@ -60,4 +53,3 @@ function verifySignature(
 export default {
   verifySignature,
 } as const;
-

@@ -1,14 +1,13 @@
-import logger from "jet-logger";
+import logger from 'jet-logger';
 
-import ENV from "@/common/constants/ENV";
-import server from "./server";
+import ENV from '@/common/constants/ENV';
+import server from './server';
 
 /******************************************************************************
                                 Constants
 ******************************************************************************/
 
-const SERVER_START_MSG =
-  "Express server started on port: " + ENV.Port.toString();
+const SERVER_START_MSG = `Express server started on port: ${ENV.Port.toString()}`;
 
 /******************************************************************************
                                   Run

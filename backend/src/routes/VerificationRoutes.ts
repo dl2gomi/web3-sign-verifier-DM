@@ -1,38 +1,38 @@
-import { Request, Response } from "express";
-import HttpStatusCodes from "@/common/constants/HttpStatusCodes";
-import { VerificationService, VerificationRequest } from "@/services";
+import { Request, Response } from 'express';
+import HttpStatusCodes from '@/common/constants/HttpStatusCodes';
+import { VerificationService } from '@/services';
 
 /**
  * Verify a Web3 signature
  */
-async function verifySignature(req: Request, res: Response) {
-  const { message, signature } = req.body;
+function verifySignature(req: Request, res: Response) {
+  const { message, signature } = req.body as {
+    message: string,
+    signature: string,
+  };
 
   // Validate request
   if (!message || !signature) {
     return res.status(HttpStatusCodes.BAD_REQUEST).json({
-      error: "Missing required fields: message and signature",
+      error: 'Missing required fields: message and signature',
     });
   }
 
-  if (typeof message !== "string" || typeof signature !== "string") {
+  if (typeof message !== 'string' || typeof signature !== 'string') {
     return res.status(HttpStatusCodes.BAD_REQUEST).json({
-      error: "Invalid field types: message and signature must be strings",
+      error: 'Invalid field types: message and signature must be strings',
     });
   }
 
   try {
     // Verify the signature
-    const result = await VerificationService.verifySignature(
-      message,
-      signature
-    );
+    const result = VerificationService.verifySignature(message, signature);
 
     return res.status(HttpStatusCodes.OK).json(result);
   } catch (error) {
     return res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({
-      error: "An error occurred during signature verification",
-      details: error instanceof Error ? error.message : "Unknown error",
+      error: 'An error occurred during signature verification',
+      details: error instanceof Error ? error.message : 'Unknown error',
     });
   }
 }
