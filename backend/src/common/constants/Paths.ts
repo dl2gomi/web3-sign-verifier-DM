@@ -1,11 +1,8 @@
 
 export default {
   Base: '/api',
-  Users: {
-    Base: '/users',
-    Get: '/all',
-    Add: '/add',
-    Update: '/update',
-    Delete: '/delete/:id',
+  Verification: {
+    Base: '/v1',
+    VerifySignature: '/verify-signature',
   },
 } as const;

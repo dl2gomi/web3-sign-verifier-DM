@@ -1,8 +1,7 @@
-import { Router } from 'express';
+import { Router } from "express";
 
-import Paths from '@src/common/constants/Paths';
-import UserRoutes from './UserRoutes';
-
+import Paths from "@/common/constants/Paths";
+import VerificationRoutes from "./VerificationRoutes";
 
 /******************************************************************************
                                 Setup
@@ -10,21 +9,19 @@ import UserRoutes from './UserRoutes';
 
 const apiRouter = Router();
 
-
-// ** Add UserRouter ** //
+// ** Add VerificationRouter ** //
 
 // Init router
-const userRouter = Router();
+const verificationRouter = Router();
 
-// Get all users
-userRouter.get(Paths.Users.Get, UserRoutes.getAll);
-userRouter.post(Paths.Users.Add, UserRoutes.add);
-userRouter.put(Paths.Users.Update, UserRoutes.update);
-userRouter.delete(Paths.Users.Delete, UserRoutes.delete);
+// Verify signature
+verificationRouter.post(
+  Paths.Verification.VerifySignature,
+  VerificationRoutes.verifySignature
+);
 
-// Add UserRouter
-apiRouter.use(Paths.Users.Base, userRouter);
-
+// Add VerificationRouter
+apiRouter.use(Paths.Verification.Base, verificationRouter);
 
 /******************************************************************************
                                 Export default

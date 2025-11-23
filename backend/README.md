@@ -1,65 +1,170 @@
-## About
+# Web3 Signature Verifier - Backend
 
-This project was created with [express-generator-typescript](https://github.com/seanpmaxwell/express-generator-typescript).
+Backend API for verifying Web3 signatures using ethers.js.
 
-**IMPORTANT** for demo purposes I had to disable `helmet` in production. In any real world app you should change these 3 lines of code in `src/server.ts`:
-```ts
-// eslint-disable-next-line n/no-process-env
-if (!process.env.DISABLE_HELMET) {
-  app.use(helmet());
+## Features
+
+- ✅ Signature verification using ethers.js
+- ✅ RESTful API with Express
+- ✅ TypeScript for type safety
+- ✅ CORS enabled for frontend communication
+- ✅ Comprehensive error handling
+- ✅ Health check endpoints
+- ✅ Unit tests with Vitest
+
+## Prerequisites
+
+- Node.js >= 16.0.0
+- npm or yarn
+
+## Installation
+
+```bash
+npm install
+```
+
+## Running the Server
+
+### Development Mode
+```bash
+npm run dev
+```
+
+### Development with Hot Reload
+```bash
+npm run dev:hot
+```
+
+### Production Build
+```bash
+npm run build
+npm start
+```
+
+## API Endpoints
+
+### Verify Signature
+**POST** `/api/v1/verify-signature`
+
+Verifies a Web3 signature and returns the signer address.
+
+**Request Body:**
+```json
+{
+  "message": "Hello, Web3!",
+  "signature": "0x..."
 }
 ```
 
-To just this:
-```ts
-app.use(helmet());
+**Response:**
+```json
+{
+  "isValid": true,
+  "signer": "0x...",
+  "originalMessage": "Hello, Web3!"
+}
 ```
 
+**Status Codes:**
+- `200 OK` - Success
+- `400 Bad Request` - Missing or invalid parameters
+- `500 Internal Server Error` - Server error
 
-## Available Scripts
+### Health Checks
 
-### `npm run clean-install`
+**GET** `/`
+Returns API status and version.
 
-Remove the existing `node_modules/` folder, `package-lock.json`, and reinstall all library modules.
+**GET** `/health`
+Returns server health status.
 
+## Testing
 
-### `npm run dev` or `npm run dev:hot` (hot reloading)
+Run all tests:
+```bash
+npm test
+```
 
-Run the server in development mode.<br/>
+## Project Structure
 
-**IMPORTANT** development mode uses `swc` for performance reasons which DOES NOT check for typescript errors. Run `npm run type-check` to check for type errors. NOTE: you should use your IDE to prevent most type errors.
+```
+backend/
+├── src/
+│   ├── routes/
+│   │   ├── VerificationRoutes.ts   # Verification endpoint handlers
+│   │   └── index.ts                # Route aggregator
+│   ├── services/
+│   │   └── VerificationService.ts  # Signature verification logic
+│   ├── common/
+│   │   └── constants/
+│   │       └── Paths.ts            # API path constants
+│   ├── server.ts                   # Express server setup
+│   └── index.ts                    # Entry point
+├── tests/
+│   └── verification.test.ts        # API tests
+└── package.json
+```
 
+## Environment Variables
 
-### `npm test` or `npm run test:hot` (hot reloading)
+Create a `.env` file in the backend directory:
 
-Run all unit-tests.
+```env
+PORT=3000
+NODE_ENV=development
+FRONTEND_URL=http://localhost:5173
+```
 
+## Technology Stack
 
-### `npm test -- "name of test file" (i.e. users).`
+- **Framework:** Express.js
+- **Language:** TypeScript
+- **Signature Verification:** ethers.js
+- **Testing:** Vitest + Supertest
+- **Security:** Helmet, CORS
 
-Run a single unit-test.
+## Development
 
+### Linting
+```bash
+npm run lint
+```
 
-### `npm run lint`
+### Type Checking
+```bash
+npm run type-check
+```
 
-Check for linting errors.
+## API Design
 
+The API follows RESTful principles and returns JSON responses. All endpoints use proper HTTP status codes and include error messages when applicable.
 
-### `npm run build`
+### Error Response Format
+```json
+{
+  "error": "Error message describing what went wrong"
+}
+```
 
-Build the project for production.
+## Security
 
+- CORS is configured to only allow requests from the frontend URL
+- Helmet.js is enabled in production for security headers
+- Input validation on all endpoints
+- Proper error handling without exposing sensitive information
 
-### `npm start`
+## Contributing
 
-Run the production build (Must be built first).
+1. Create a feature branch
+2. Make your changes
+3. Run tests: `npm test`
+4. Run linter: `npm run lint`
+5. Submit a pull request
 
+## License
 
-### `npm run type-check`
+MIT
 
-Check for typescript errors.
+## Author
 
-
-## Additional Notes
-
-- If `npm run dev` gives you issues with bcrypt on MacOS you may need to run: `npm rebuild bcrypt --build-from-source`. 
+Edward Serrano
