@@ -1,0 +1,368 @@
+/* MFA Container - Full screen centered */
+.mfa-container {
+  min-height: calc(100vh - 200px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-2xl);
+}
+
+/* MFA Card - Dark professional style */
+.mfa-card {
+  background-color: var(--bg-elevated);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: var(--space-3xl);
+  max-width: 480px;
+  width: 100%;
+  box-shadow: var(--shadow-xl);
+  text-align: center;
+}
+
+/* Shield Icon - Top centered icon */
+.mfa-shield-icon {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto var(--space-xl);
+  border-radius: var(--radius-full);
+  background-color: rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  color: var(--text-primary);
+}
+
+/* Title */
+.mfa-title {
+  margin: 0 0 var(--space-sm);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+/* Subtitle */
+.mfa-subtitle {
+  margin: 0 0 var(--space-3xl);
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* Email display */
+.mfa-email {
+  margin: var(--space-sm) 0 var(--space-md);
+  font-size: var(--font-size-sm);
+  color: var(--text-tertiary);
+  font-family: var(--font-family-monospace);
+}
+
+/* Steps Container */
+.mfa-steps {
+  text-align: left;
+  margin-top: var(--space-3xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+/* Individual Step */
+.mfa-step {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+/* Step Header */
+.step-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.step-number {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  background-color: var(--text-primary);
+  color: var(--bg-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-lg);
+}
+
+.step-title {
+  margin: 0;
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+.step-description {
+  margin: 0;
+  font-size: var(--font-size-base);
+  color: var(--text-tertiary);
+  line-height: 1.6;
+}
+
+/* QR Code Container */
+.qr-code-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-3xl);
+  background-color: var(--bg-secondary);
+}
+
+.qr-code-image {
+  max-width: 240px;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  background-color: white;
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Secret Key Section */
+.secret-key-section {
+  margin-top: var(--space-xl);
+  text-align: center;
+}
+
+.secret-key-label {
+  margin: 0 0 var(--space-md);
+  font-size: var(--font-size-sm);
+  color: var(--text-tertiary);
+  font-weight: var(--font-weight-medium);
+}
+
+.secret-key-container {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-md);
+}
+
+.secret-key-text {
+  flex: 1;
+  font-family: var(--font-family-monospace);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  letter-spacing: 0.05em;
+  word-break: break-all;
+  text-align: left;
+}
+
+.secret-key-copy-btn {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-hover);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.secret-key-copy-btn:hover {
+  background-color: var(--bg-elevated);
+  border-color: var(--border-heavy);
+  color: var(--text-primary);
+  transform: scale(1.05);
+}
+
+/* Code Input Wrapper */
+.code-input-wrapper {
+  position: relative;
+  margin-bottom: var(--space-md);
+}
+
+.code-input-icon {
+  position: absolute;
+  left: var(--space-xl);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-quaternary);
+  font-size: var(--font-size-xl);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Code Input Field */
+.mfa-code-input {
+  width: 100%;
+  padding: var(--space-sm);
+  font-size: 32px;
+  font-weight: var(--font-weight-bold);
+  text-align: center;
+  letter-spacing: 0.5em;
+  border: 2px solid var(--border-medium);
+  border-radius: var(--radius-lg);
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  transition: all var(--transition-fast);
+  font-family: var(--font-family-monospace);
+}
+
+.mfa-code-input:focus {
+  outline: none;
+  border-color: var(--text-primary);
+  background-color: var(--bg-primary);
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.08);
+}
+
+.mfa-code-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.mfa-code-input::placeholder {
+  color: var(--text-quaternary);
+  letter-spacing: 0.3em;
+  font-weight: var(--font-weight-normal);
+  font-size: 24px;
+}
+
+/* Error Message */
+.mfa-error {
+  margin-bottom: var(--space-lg);
+  padding: var(--space-md) var(--space-lg);
+  background-color: rgba(239, 68, 68, 0.15);
+  border: 1px solid var(--color-error);
+  border-radius: var(--radius-md);
+  color: var(--color-error);
+  font-size: var(--font-size-sm);
+  text-align: center;
+  font-weight: var(--font-weight-medium);
+}
+
+/* Buttons */
+.mfa-btn {
+  width: 100%;
+  padding: var(--space-md) var(--space-md);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  border-radius: var(--radius-lg);
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+}
+
+.mfa-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.mfa-btn-primary {
+  background-color: var(--text-primary);
+  color: var(--bg-primary);
+  border-color: var(--text-primary);
+}
+
+.mfa-btn-primary:hover:not(:disabled) {
+  background-color: var(--text-secondary);
+  border-color: var(--text-secondary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-xl);
+}
+
+.mfa-btn-secondary {
+  margin-top: var(--space-md);
+  background-color: transparent;
+  color: var(--text-secondary);
+  border-color: var(--border-medium);
+}
+
+.mfa-btn-secondary:hover:not(:disabled) {
+  background-color: var(--bg-hover);
+  color: var(--text-primary);
+  border-color: var(--border-heavy);
+}
+
+/* Skip Button */
+.mfa-skip-btn {
+  margin-top: var(--space-2xl);
+  padding: var(--space-sm);
+  background: none;
+  border: none;
+  color: var(--text-tertiary);
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  transition: color var(--transition-fast);
+}
+
+.mfa-skip-btn:hover:not(:disabled) {
+  color: var(--text-primary);
+  text-decoration: underline;
+}
+
+.mfa-skip-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* QR Code Loading State */
+.qr-code-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-lg);
+  min-height: 240px;
+  color: var(--text-tertiary);
+}
+
+.qr-code-loading svg {
+  color: var(--text-secondary);
+}
+
+.qr-code-loading p {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--text-tertiary);
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .mfa-container {
+    padding: var(--space-lg);
+  }
+
+  .mfa-card {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .mfa-title {
+    font-size: var(--font-size-xl);
+  }
+
+  .mfa-code-input {
+    font-size: var(--font-size-lg);
+    letter-spacing: 0.5em;
+  }
+
+  .qr-code-wrapper {
+    padding: var(--space-lg);
+  }
+
+  .qr-code-image {
+    max-width: 160px;
+  }
+}

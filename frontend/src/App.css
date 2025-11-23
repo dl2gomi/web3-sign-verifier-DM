@@ -417,6 +417,7 @@ body {
 
   .main-content {
     padding: var(--space-lg);
+    gap: var(--space-lg);
   }
 
   .footer-content {
@@ -432,6 +433,6 @@ body {
 
   .main-content {
     padding: var(--space-md);
-    gap: var(--space-lg);
+    gap: var(--space-md);
   }
 }

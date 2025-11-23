@@ -1,0 +1,198 @@
+/* MFA Settings Container */
+.mfa-settings-container {
+  min-height: calc(100vh - 200px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(0 --space-2xl);
+}
+
+/* MFA Settings Card */
+.mfa-settings-card {
+  background-color: var(--bg-elevated);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  max-width: 600px;
+  gap: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  box-shadow: var(--shadow-xl);
+  position: relative;
+}
+
+/* Back Button */
+.mfa-back-btn {
+  position: absolute;
+  top: var(--space-2xl);
+  background: transparent;
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  transition: all var(--transition-fast);
+}
+
+.mfa-back-btn:hover {
+  color: var(--text-primary);
+  border-color: var(--border-heavy);
+  background-color: var(--bg-hover);
+}
+
+/* Settings Header */
+.mfa-settings-header {
+  text-align: center;
+  margin: var(--space-2xl) 0 0 0;
+}
+
+/* Status Section */
+.mfa-status-section {
+  margin: 0 var(--space-2xl) var(--space-3xl) var(--space-2xl);
+}
+
+.mfa-status-card {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-lg);
+  padding: var(--space-2xl);
+}
+
+.mfa-status-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-lg);
+}
+
+.mfa-status-header h3 {
+  margin: 0;
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+}
+
+/* Status Badge */
+.mfa-status-badge {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--radius-lg);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.mfa-status-badge.enabled {
+  background-color: rgba(34, 197, 94, 0.15);
+  color: var(--color-success);
+  border: 2px solid var(--color-success);
+}
+
+.mfa-status-badge.disabled {
+  background-color: rgba(239, 68, 68, 0.15);
+  color: var(--color-error);
+  border: 2px solid var(--color-error);
+}
+
+.mfa-status-description {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--text-tertiary);
+  line-height: 1.7;
+}
+
+/* Actions Section */
+.mfa-actions {
+  margin: 0 var(--space-2xl) var(--space-3xl) var(--space-2xl);
+}
+
+.mfa-actions .mfa-btn {
+  background-color: var(--text-primary);
+  color: var(--bg-primary);
+  border-color: var(--text-primary);
+}
+
+.mfa-actions .mfa-btn:hover:not(:disabled) {
+  background-color: var(--text-secondary);
+  border-color: var(--text-secondary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-xl);
+}
+
+.mfa-btn-danger {
+  background-color: transparent !important;
+  color: var(--color-error) !important;
+  border-color: var(--color-error) !important;
+}
+
+.mfa-btn-danger:hover:not(:disabled) {
+  background-color: rgba(239, 68, 68, 0.15) !important;
+  border-color: var(--color-error) !important;
+  color: var(--color-error) !important;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Info Section */
+.mfa-info-section {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-lg);
+  padding: var(--space-2xl);
+}
+
+.mfa-info-section h3 {
+  margin: 0 0 var(--space-lg);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+}
+
+.mfa-info-list {
+  margin: 0;
+  padding-left: var(--space-2xl);
+  list-style: decimal;
+}
+
+.mfa-info-list li {
+  margin-bottom: var(--space-md);
+  padding-left: var(--space-sm);
+  font-size: var(--font-size-sm);
+  color: var(--text-tertiary);
+  line-height: 1.7;
+}
+
+.mfa-info-list li:last-child {
+  margin-bottom: 0;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .mfa-settings-container {
+    padding: var(0 --space-lg);
+  }
+
+  .mfa-settings-header {
+    margin: var(--space-xl) 0 0 0;
+  }
+
+  .mfa-back-btn {
+    top: var(--space-md);
+    left: var(--space-md);
+  }
+
+  .mfa-status-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-sm);
+  }
+}
