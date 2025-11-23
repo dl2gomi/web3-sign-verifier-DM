@@ -1,5 +1,4 @@
-import { useEffect } from 'react';
-import { BrowserRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import { useIsLoggedIn, useDynamicContext } from '@dynamic-labs/sdk-react-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSun, faMoon } from '@fortawesome/free-regular-svg-icons';
@@ -8,67 +7,30 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { Toaster } from 'react-hot-toast';
 import { useDarkMode } from './lib/useDarkMode';
 import { EmbeddedLogin, WalletDropdown } from './components/Auth';
-import { MainPage, MFAPage, MFASettingsPage } from './pages';
-import { useMFA } from './hooks';
+import { MessageForm, SignatureHistory } from './components/Signer';
 import './App.css';
 
-// Login redirect component
-function LoginRedirect() {
-  const navigate = useNavigate();
-  const isLoggedIn = useIsLoggedIn();
-  const { mfaState } = useMFA();
-
-  useEffect(() => {
-    if (isLoggedIn) {
-      // Redirect to MFA if setup needed or verification required
-      if (mfaState === 'setup' || mfaState === 'verification') {
-        navigate('/mfa');
-      } else {
-        navigate('/app');
-      }
-    }
-  }, [isLoggedIn, mfaState, navigate]);
-
-  return <EmbeddedLogin />;
-}
-
-// Protected route wrapper
-function ProtectedRoute({ children }: { children: React.ReactNode }) {
-  const isLoggedIn = useIsLoggedIn();
-  const { mfaState } = useMFA();
-
-  if (!isLoggedIn) {
-    return <Navigate to="/" replace />;
-  }
-
-  // If user needs MFA setup or verification, redirect to MFA page
-  if (mfaState === 'setup' || mfaState === 'verification') {
-    return <Navigate to="/mfa" replace />;
-  }
-
-  return <>{children}</>;
-}
-
-// MFA route wrapper
-function MFARoute({ children }: { children: React.ReactNode }) {
-  const isLoggedIn = useIsLoggedIn();
-  const { mfaState } = useMFA();
-
-  if (!isLoggedIn) {
-    return <Navigate to="/" replace />;
-  }
-
-  // If MFA already completed (enabled but not in verification state), redirect to app
-  if (mfaState === 'enabled') {
-    return <Navigate to="/app" replace />;
-  }
-
-  return <>{children}</>;
-}
-
-function AppContent() {
+function App() {
   const { isDarkMode, toggleDarkMode } = useDarkMode();
   const isLoggedIn = useIsLoggedIn();
+  const { sdkHasLoaded } = useDynamicContext();
+  const [historyRefresh, setHistoryRefresh] = useState(0);
+
+  // Show loading state while SDK initializes
+  if (!sdkHasLoaded) {
+    return (
+      <div className={`container ${isDarkMode ? 'dark' : 'light'}`} data-theme={isDarkMode ? 'dark' : 'light'}>
+        <div className="loading-container">
+          <div className="spinner-large"></div>
+          <p>Loading Web3 Signer...</p>
+        </div>
+      </div>
+    );
+  }
+
+  const handleMessageSigned = () => {
+    setHistoryRefresh((prev) => prev + 1);
+  };
 
   return (
     <div className={`container ${isDarkMode ? 'dark' : 'light'}`} data-theme={isDarkMode ? 'dark' : 'light'}>
@@ -126,45 +88,16 @@ function AppContent() {
         </div>
       </header>
 
-      {/* Main Content with Routing */}
+      {/* Main Content */}
       <main className="main-content">
-        <Routes>
-          {/* Login Page */}
-          <Route path="/" element={<LoginRedirect />} />
-
-          {/* MFA Page - Protected, requires login */}
-          <Route
-            path="/mfa"
-            element={
-              <MFARoute>
-                <MFAPage />
-              </MFARoute>
-            }
-          />
-
-          {/* Main App - Protected, requires login and MFA */}
-          <Route
-            path="/app"
-            element={
-              <ProtectedRoute>
-                <MainPage />
-              </ProtectedRoute>
-            }
-          />
-
-          {/* MFA Settings - Protected, requires login */}
-          <Route
-            path="/mfa-settings"
-            element={
-              <ProtectedRoute>
-                <MFASettingsPage />
-              </ProtectedRoute>
-            }
-          />
-
-          {/* Fallback - redirect to home */}
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
+        {!isLoggedIn ? (
+          <EmbeddedLogin />
+        ) : (
+          <>
+            <MessageForm onSuccess={handleMessageSigned} />
+            <SignatureHistory refreshTrigger={historyRefresh} />
+          </>
+        )}
       </main>
 
       {/* Footer */}
@@ -184,30 +117,6 @@ function AppContent() {
         </div>
       </footer>
     </div>
-  );
-}
-
-// Main App with Router
-function App() {
-  const { sdkHasLoaded } = useDynamicContext();
-  const { isDarkMode } = useDarkMode();
-
-  // Show loading state while SDK initializes
-  if (!sdkHasLoaded) {
-    return (
-      <div className={`container ${isDarkMode ? 'dark' : 'light'}`} data-theme={isDarkMode ? 'dark' : 'light'}>
-        <div className="loading-container">
-          <div className="spinner-large"></div>
-          <p>Loading Web3 Signer...</p>
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <BrowserRouter>
-      <AppContent />
-    </BrowserRouter>
   );
 }
 

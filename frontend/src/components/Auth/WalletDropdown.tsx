@@ -1,14 +1,12 @@
 import { useState, useRef, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useDynamicContext } from '@dynamic-labs/sdk-react-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faWallet, faEnvelope, faChevronDown, faCopy, faCheck, faSignOutAlt, faShieldAlt } from '@fortawesome/free-solid-svg-icons';
+import { faWallet, faEnvelope, faChevronDown, faCopy, faCheck, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import toast from 'react-hot-toast';
 import './Auth.css';
 
 export function WalletDropdown() {
   const { primaryWallet, user, handleLogOut } = useDynamicContext();
-  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [copied, setCopied] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -42,11 +40,6 @@ export function WalletDropdown() {
 
   const truncateAddress = (address: string) => {
     return `${address.slice(0, 6)}...${address.slice(-4)}`;
-  };
-
-  const handleMFASettingsClick = () => {
-    setIsOpen(false);
-    navigate('/mfa-settings');
   };
 
   const handleLogoutClick = () => {
@@ -99,11 +92,6 @@ export function WalletDropdown() {
           )}
 
           <div className="dropdown-divider"></div>
-
-          <button onClick={handleMFASettingsClick} className="dropdown-menu-btn">
-            <FontAwesomeIcon icon={faShieldAlt} />
-            <span>MFA Settings</span>
-          </button>
 
           <button onClick={handleLogoutClick} className="dropdown-logout-btn">
             <FontAwesomeIcon icon={faSignOutAlt} />

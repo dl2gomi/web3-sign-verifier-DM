@@ -38,7 +38,7 @@ npm run dev:hot
 ### Production Build
 ```bash
 npm run build
-npm start
+NODE_ENV=production npm start
 ```
 
 ## API Endpoints
@@ -107,13 +107,36 @@ backend/
 
 ## Environment Variables
 
-Create a `.env` file in the backend directory:
+The backend uses environment-specific configuration files in the `config/` folder.
+
+### Development Configuration
+
+Create `config/.env.development`:
 
 ```env
 PORT=3000
 NODE_ENV=development
 FRONTEND_URL=http://localhost:5173
 ```
+
+### Production Configuration
+
+Create `config/.env.production`:
+
+```env
+PORT=3000
+NODE_ENV=production
+FRONTEND_URL=https://your-frontend-domain.com
+```
+
+### How It Works
+
+The backend automatically loads the correct config file based on the `NODE_ENV` environment variable:
+- `NODE_ENV=development` → loads `config/.env.development`
+- `NODE_ENV=production` → loads `config/.env.production`
+- `NODE_ENV=test` → loads `config/.env.test`
+
+See `config.ts` in the project root for the configuration logic.
 
 ## Technology Stack
 
