@@ -1,0 +1,382 @@
+/* Import variables */
+@import '../../styles/variables.css';
+
+/* ========================================
+   Authentication Container & Card
+   ======================================== */
+
+.auth-container {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.auth-card {
+  background-color: var(--bg-elevated);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-xl);
+  padding: var(--space-2xl);
+  box-shadow: var(--shadow-lg);
+}
+
+.auth-header {
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+}
+
+.auth-header h1 {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.auth-header p {
+  font-size: var(--font-size-base);
+  color: var(--text-secondary);
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+/* ========================================
+   Wallet Information Card
+   ======================================== */
+
+.wallet-info {
+  width: 100%;
+  background-color: var(--bg-elevated);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-sm);
+}
+
+.wallet-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.wallet-badge {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  flex: 1;
+  min-width: 200px;
+}
+
+.wallet-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background-color: var(--bg-secondary);
+  border: 2px solid var(--border-medium);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-xl);
+  color: var(--accent-primary);
+}
+
+.wallet-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  flex: 1;
+}
+
+.wallet-label {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.wallet-address-container {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.wallet-address {
+  font-family: 'Courier New', monospace;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-primary);
+}
+
+.user-email {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  padding: var(--space-sm) var(--space-md);
+  background-color: var(--bg-secondary);
+  border-radius: var(--radius-md);
+}
+
+.email-icon {
+  font-size: var(--font-size-base);
+}
+
+/* ========================================
+   Wallet Dropdown (Header)
+   ======================================== */
+
+.wallet-dropdown {
+  position: relative;
+  height: 40px;
+}
+
+.wallet-dropdown-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  height: 40px;
+  min-height: 40px;
+  padding: 0 var(--space-md);
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  min-width: 180px;
+}
+
+.wallet-dropdown-trigger:hover {
+  background-color: var(--bg-hover);
+  border-color: var(--border-heavy);
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-1px);
+}
+
+.wallet-dropdown-trigger:active {
+  transform: translateY(0);
+}
+
+.wallet-icon-small {
+  font-size: var(--font-size-base);
+  color: var(--text-secondary);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.wallet-address-short {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  flex: 1;
+  text-align: left;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  line-height: 1;
+  display: flex;
+  align-items: center;
+}
+
+.dropdown-arrow {
+  font-size: var(--font-size-xs);
+  transition: transform var(--transition-base);
+  color: var(--text-tertiary);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.dropdown-arrow.open {
+  transform: rotate(180deg);
+}
+
+.wallet-dropdown-menu {
+  position: absolute;
+  top: calc(100% + var(--space-sm));
+  right: 0;
+  min-width: 300px;
+  background-color: var(--bg-elevated);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
+  padding: var(--space-md);
+  z-index: 1000;
+  animation: slideDown var(--transition-base);
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dropdown-section {
+  padding: var(--space-sm) 0;
+}
+
+.dropdown-section:not(:last-child) {
+  margin-bottom: var(--space-sm);
+}
+
+.dropdown-label {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-sm);
+}
+
+.dropdown-address-container {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  background-color: var(--bg-secondary);
+  padding: var(--space-sm);
+  border-radius: var(--radius-sm);
+}
+
+.dropdown-address {
+  flex: 1;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-primary);
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  line-height: 1.4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dropdown-icon-btn {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-tertiary);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-size: var(--font-size-sm);
+}
+
+.dropdown-icon-btn:hover {
+  background-color: var(--bg-hover);
+  color: var(--text-primary);
+  border-color: var(--border-heavy);
+  transform: scale(1.05);
+}
+
+.dropdown-icon-btn:active {
+  transform: scale(0.95);
+}
+
+.dropdown-value {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  padding: var(--space-sm);
+  background-color: var(--bg-secondary);
+  border-radius: var(--radius-sm);
+}
+
+.dropdown-icon {
+  font-size: var(--font-size-base);
+  color: var(--text-tertiary);
+  flex-shrink: 0;
+}
+
+.dropdown-divider {
+  height: 1px;
+  background-color: var(--border-light);
+  margin: var(--space-md) 0;
+}
+
+.dropdown-logout-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  min-height: 36px;
+}
+
+.dropdown-logout-btn:hover {
+  background-color: var(--bg-hover);
+  border-color: var(--border-heavy);
+  color: var(--text-primary);
+  transform: translateY(-1px);
+}
+
+.dropdown-logout-btn:active {
+  transform: translateY(0);
+}
+
+/* ========================================
+   Responsive Design
+   ======================================== */
+
+@media (max-width: 768px) {
+  .auth-card {
+    padding: var(--space-xl);
+  }
+
+  .wallet-info {
+    padding: var(--space-lg);
+  }
+
+  .wallet-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .wallet-dropdown-menu {
+    right: auto;
+    left: 0;
+    min-width: 280px;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-card {
+    padding: var(--space-lg);
+  }
+
+  .wallet-dropdown-trigger {
+    min-width: 140px;
+  }
+
+  .wallet-address-short {
+    font-size: var(--font-size-xs);
+  }
+}

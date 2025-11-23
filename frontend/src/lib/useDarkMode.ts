@@ -1,19 +1,32 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from 'react';
 
 export function useDarkMode() {
-  const [isDarkMode, setIsDarkMode] = useState(
-    window.matchMedia("(prefers-color-scheme: dark)").matches
-  );
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    // Check localStorage first
+    const stored = localStorage.getItem('darkMode');
+    if (stored !== null) {
+      return stored === 'true';
+    }
+
+    // Fall back to system preference
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+  });
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-    const handleChange = (e: MediaQueryListEvent) => {
-      setIsDarkMode(e.matches);
-    };
+    // Save to localStorage
+    localStorage.setItem('darkMode', isDarkMode.toString());
 
-    mediaQuery.addEventListener("change", handleChange);
-    return () => mediaQuery.removeEventListener("change", handleChange);
-  }, []);
+    // Update document class for global styling
+    if (isDarkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [isDarkMode]);
 
-  return { isDarkMode, toggleDarkMode: () => setIsDarkMode(!isDarkMode) };
+  const toggleDarkMode = () => {
+    setIsDarkMode((prev) => !prev);
+  };
+
+  return { isDarkMode, toggleDarkMode };
 }
