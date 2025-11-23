@@ -50,15 +50,17 @@ describe('useMessageSigning Hook', () => {
 
       const { result } = renderHook(() => useMessageSigning());
 
-      let signedMessage;
+      let signedMessage!: ReturnType<typeof result.current.signMessage> extends Promise<infer T> ? T : never;
       await act(async () => {
         signedMessage = await result.current.signMessage('Hello World');
       });
 
       expect(signedMessage).not.toBeNull();
-      expect(signedMessage?.message).toBe('Hello World');
-      expect(signedMessage?.signature).toBe(mockSignature);
-      expect(signedMessage?.walletAddress).toBe(mockWalletValue.address);
+      if (signedMessage) {
+        expect(signedMessage.message).toBe('Hello World');
+        expect(signedMessage.signature).toBe(mockSignature);
+        expect(signedMessage.walletAddress).toBe(mockWalletValue.address);
+      }
       expect(mockSignMessage).toHaveBeenCalledWith('Hello World');
       expect(storageService.saveSignedMessage).toHaveBeenCalledWith(
         expect.objectContaining({
