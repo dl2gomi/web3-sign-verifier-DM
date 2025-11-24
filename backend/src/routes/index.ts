@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import Paths from '@/common/constants/Paths';
+import Paths from '../common/constants/Paths';
 import VerificationRoutes from './VerificationRoutes';
 
 /******************************************************************************

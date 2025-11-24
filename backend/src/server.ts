@@ -4,12 +4,12 @@ import cors from 'cors';
 import express, { Request, Response, NextFunction } from 'express';
 import logger from 'jet-logger';
 
-import BaseRouter from '@/routes';
+import BaseRouter from './routes';
 
-import Paths from '@/common/constants/Paths';
-import HttpStatusCodes from '@/common/constants/HttpStatusCodes';
-import { RouteError } from '@/common/util/route-errors';
-import { NodeEnvs } from '@/common/constants';
+import Paths from './common/constants/Paths';
+import HttpStatusCodes from './common/constants/HttpStatusCodes';
+import { RouteError } from './common/util/route-errors';
+import { NodeEnvs } from './common/constants';
 
 /******************************************************************************
                                 Setup
