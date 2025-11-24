@@ -261,6 +261,27 @@ npm run type-check
 
 ### Backend Deployment
 
+#### Option 1: Deploy to Render.com (Recommended)
+
+1. Push your code to GitHub
+
+2. Create a new Web Service on Render.com:
+   - Connect your GitHub repository
+   - Root Directory: `backend`
+   - Build Command: `npm install --production=false && npm run build`
+   - Start Command: `npm start`
+
+3. Set the following environment variables in Render dashboard:
+   ```
+   NODE_ENV=production
+   PORT=3000
+   FRONTEND_URL=https://your-frontend-domain.com
+   ```
+
+4. Deploy! Render will automatically build and start your backend.
+
+#### Option 2: Manual Deployment (VPS, AWS, etc.)
+
 1. Build the project:
 
    ```bash
@@ -268,7 +289,7 @@ npm run type-check
    npm run build
    ```
 
-2. Ensure production environment is configured in `backend/config/.env.production`:
+2. Create a `.env` file in the backend root directory:
 
    ```env
    NODE_ENV=production
@@ -276,13 +297,11 @@ npm run type-check
    FRONTEND_URL=https://your-frontend-domain.com
    ```
 
-3. Start the server with production environment:
+3. Start the server:
 
    ```bash
-   NODE_ENV=production npm start
+   npm start
    ```
-
-   Or set the environment variable in your hosting platform (Heroku, AWS, etc.)
 
 ### Frontend Deployment
 
