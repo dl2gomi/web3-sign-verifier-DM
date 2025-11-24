@@ -1,6 +1,7 @@
 import logger from 'jet-logger';
 
 import server from './server';
+import '../config';
 
 /******************************************************************************
                                 Constants
