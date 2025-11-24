@@ -1,14 +1,14 @@
 import { Request, Response } from 'express';
-import HttpStatusCodes from '@/common/constants/HttpStatusCodes';
-import { VerificationService } from '@/services';
+import HttpStatusCodes from '../common/constants/HttpStatusCodes';
+import { VerificationService } from '../services';
 
 /**
  * Verify a Web3 signature
  */
 function verifySignature(req: Request, res: Response) {
   const { message, signature } = req.body as {
-    message: string,
-    signature: string,
+    message: string;
+    signature: string;
   };
 
   // Validate request
