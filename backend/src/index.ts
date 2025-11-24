@@ -14,7 +14,7 @@ const SERVER_START_MSG = `Express server started on port: ${process.env.PORT?.to
 ******************************************************************************/
 
 // Start the server
-server.listen(process.env.PORT, (err) => {
+server.listen(process.env.PORT ?? 3000, (err) => {
   if (!!err) {
     logger.err(err.message);
   } else {
