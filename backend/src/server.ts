@@ -7,7 +7,6 @@ import logger from 'jet-logger';
 import BaseRouter from '@/routes';
 
 import Paths from '@/common/constants/Paths';
-import ENV from '@/common/constants/ENV';
 import HttpStatusCodes from '@/common/constants/HttpStatusCodes';
 import { RouteError } from '@/common/util/route-errors';
 import { NodeEnvs } from '@/common/constants';
@@ -23,7 +22,7 @@ const app = express();
 // CORS - Allow frontend to communicate with backend
 app.use(
   cors({
-    origin: ENV.FrontendUrl ?? 'http://localhost:5173',
+    origin: process.env.FRONTEND_URL ?? 'http://localhost:5173',
     credentials: true,
   }),
 );
@@ -33,12 +32,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Show routes called in console during development
-if (ENV.NodeEnv === NodeEnvs.Dev) {
+if (process.env.NODE_ENV === NodeEnvs.Dev) {
   app.use(morgan('dev'));
 }
 
 // Security
-if (ENV.NodeEnv === NodeEnvs.Production) {
+if (process.env.NODE_ENV === NodeEnvs.Production) {
   // eslint-disable-next-line n/no-process-env
   if (!process.env.DISABLE_HELMET) {
     app.use(helmet());
@@ -50,7 +49,7 @@ app.use(Paths.Base, BaseRouter);
 
 // Add error handler
 app.use((err: Error, _: Request, res: Response, next: NextFunction) => {
-  if (ENV.NodeEnv !== NodeEnvs.Test.valueOf()) {
+  if (process.env.NODE_ENV !== NodeEnvs.Test.valueOf()) {
     logger.err(err, true);
   }
   let status = HttpStatusCodes.BAD_REQUEST;
