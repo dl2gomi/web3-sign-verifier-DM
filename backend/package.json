@@ -8,7 +8,7 @@
     "dev": "ts-node ./src",
     "dev:hot": "nodemon --exec \"npm run dev\" --watch ./src --ext .ts",
     "lint": "eslint .",
-    "start": "node -r module-alias/register ./dist",
+    "start": "node -r module-alias/register ./dist/index.js",
     "test": "vitest",
     "test:run": "vitest run",
     "type-check": "tsc --noEmit"
